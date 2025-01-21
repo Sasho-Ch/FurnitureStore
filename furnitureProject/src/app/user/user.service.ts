@@ -46,4 +46,12 @@ export class UserService {
       )
       .pipe(tap((user) => this.user$$.next(user)));
   }
+
+
+
+  login(email: string, password: string) {
+    return this.http
+      .post<UserForAuth>(`http://localhost:3000/users/login`, {email, password}, {withCredentials: true})
+      .pipe(tap((user) => this.user$$.next(user)));
+  }
 }

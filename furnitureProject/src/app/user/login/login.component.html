@@ -2,14 +2,14 @@
     <div class="container">
         <h1>Login</h1>
     
-        <form class="loginBox">
+        <form class="loginBox" [formGroup]="form" (ngSubmit)="login()">
             <div class="itemGroup">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email" formControlName="email">
             </div>
             <div class="itemGroup">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password">
+                <input type="text" id="password" name="password" formControlName="password">
             </div>
     
             <button>Login</button>
