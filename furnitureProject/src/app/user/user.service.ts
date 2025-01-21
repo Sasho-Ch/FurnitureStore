@@ -54,4 +54,16 @@ export class UserService {
       .post<UserForAuth>(`http://localhost:3000/users/login`, {email, password}, {withCredentials: true})
       .pipe(tap((user) => this.user$$.next(user)));
   }
+
+  logout() {
+    return this.http
+      .post('http://localhost:3000/users/logout',{}, { withCredentials: true })
+      .pipe(
+        tap(() => {
+          this.user$$.next(null); 
+          console.log('User logged out successfully.');
+        })
+      );
+  }
+
 }

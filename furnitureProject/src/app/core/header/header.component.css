@@ -10,7 +10,8 @@
 }
 
 a {
-    color: inherit
+    color: inherit;
+    cursor: pointer;
 }
 .homeLogo {
     width: 120px;
