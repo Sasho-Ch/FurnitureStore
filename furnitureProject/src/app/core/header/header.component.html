@@ -9,7 +9,7 @@
     <div class="userButtons">
       <ul>
         @if(isLoggedIn) {
-        <li><a href="">{{username}}'s profile</a></li>
+        <li><a routerLink='/profile'>{{username}}'s profile</a></li>
         <li><a (click)="logout()">Logout</a></li>
         } @else {
         <li><a routerLink="/login">Login</a></li>
