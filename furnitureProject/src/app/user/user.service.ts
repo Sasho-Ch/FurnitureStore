@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, tap, of, catchError } from 'rxjs';
 import { UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
@@ -18,8 +18,23 @@ export class UserService {
   }
 
   constructor(private http: HttpClient) {
+    if (this.isLocalStorageAvailable()) {
+      const savedUser = localStorage.getItem(this.USER_KEY);
+      if (savedUser) {
+        this.user = JSON.parse(savedUser);
+        this.user$$.next(this.user);
+      }
+    }
+
     this.user$.subscribe((user) => {
       this.user = user;
+      if (this.isLocalStorageAvailable()) {
+        if (user) {
+          localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+        } else {
+          localStorage.removeItem(this.USER_KEY);
+        }
+      }
     });
   }
 
@@ -41,29 +56,62 @@ export class UserService {
           rePassword,
         },
         {
-          withCredentials: true,
+          withCredentials: true, 
         }
       )
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
-
-
   login(email: string, password: string) {
     return this.http
-      .post<UserForAuth>(`http://localhost:3000/users/login`, {email, password}, {withCredentials: true})
+      .post<UserForAuth>(
+        `http://localhost:3000/users/login`,
+        { email, password },
+        { withCredentials: true } 
+      )
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
   logout() {
     return this.http
-      .post('http://localhost:3000/users/logout',{}, { withCredentials: true })
+      .post(
+        'http://localhost:3000/users/logout',
+        {},
+        { withCredentials: true } 
+      )
       .pipe(
         tap(() => {
-          this.user$$.next(null); 
+          this.user$$.next(null);
           console.log('User logged out successfully.');
         })
       );
   }
 
+  checkAuth() {
+    return this.http
+      .get<UserForAuth>(
+        `http://localhost:3000/users/profile`,
+        { withCredentials: true } 
+      )
+      .pipe(
+        tap((user) => {
+          this.user$$.next(user);
+        }),
+        catchError(() => {
+          this.user$$.next(null); 
+          return of(null); 
+        })
+      );
+  }
+
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const testKey = '__test__';
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

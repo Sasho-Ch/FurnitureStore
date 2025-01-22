@@ -1,28 +1,31 @@
 <div class="container">
-    <section class="upperLayer">
-        <a routerLink="/" class="homeLogo">
-            <img src="logo.png" alt="">
-        </a>
-        <div class="searchBar">
-            <input type="text" placeholder="Search a product">
-        </div>
-        <div class="userButtons">
-            <ul>
-                <li><a href="">Profile</a></li>
-                <li><a (click)="logout()">Logout</a></li>
-                <li><a routerLink="/login">Login</a></li>
-                <li><a routerLink="/register">Register</a></li>
-            </ul>
-        </div>
-    </section>
-    <section class="lowerLayer">
-        <div class="siteNavigation">
-            <ul>
-                <li><a href="">Furnitures</a></li>
-                <li><a href="">Your Posts</a></li>
-                <li><a href="">Add new post</a></li>
-                <li><a href="">News</a></li>
-            </ul>
-        </div>
-    </section>
+  <section class="upperLayer">
+    <a routerLink="/" class="homeLogo">
+      <img src="logo.png" alt="" />
+    </a>
+    <div class="searchBar">
+      <input type="text" placeholder="Search a product" />
+    </div>
+    <div class="userButtons">
+      <ul>
+        @if(isLoggedIn) {
+        <li><a href="">{{username}}'s profile</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+        } @else {
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/register">Register</a></li>
+        }
+      </ul>
+    </div>
+  </section>
+  <section class="lowerLayer">
+    <div class="siteNavigation">
+      <ul>
+        <li><a href="">Furnitures</a></li>
+        <li><a href="">Your Posts</a></li>
+        <li><a href="">Add new post</a></li>
+        <li><a href="">News</a></li>
+      </ul>
+    </div>
+  </section>
 </div>
