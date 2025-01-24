@@ -65,11 +65,13 @@ export class UserService {
   login(email: string, password: string) {
     return this.http
       .post<UserForAuth>(
-        `http://localhost:3000/users/login`,
+        'http://localhost:3000/users/login',
         { email, password },
         { withCredentials: true } 
       )
-      .pipe(tap((user) => this.user$$.next(user)));
+      .pipe(tap((user) => {
+        console.log(user);
+        this.user$$.next(user)}));
   }
 
   logout() {
@@ -80,14 +82,13 @@ export class UserService {
         { withCredentials: true } 
       )
       .pipe(
-        tap(() => {
+        tap((user) => {
           this.user$$.next(null);
-          console.log('User logged out successfully.');
         })
       );
   }
 
-  checkAuth() {
+  getProfile() {
     return this.http
       .get<UserForAuth>(
         `http://localhost:3000/users/profile`,

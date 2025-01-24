@@ -1,23 +1,23 @@
 <div class="profile-container">
     <h1 class="profile-title">Your Profile</h1>
   
-    <div class="profile-card" *ngIf="!isEditing">
+    <div class="profile-card" *ngIf="isEditing">
       <div class="profile-item">
         <label>Username:</label>
-        <span> profile.username </span>
+        <span> {{profileData.username}} </span>
       </div>
       <div class="profile-item">
         <label>Email:</label>
-        <span> profile.email  </span>
+        <span> {{profileData.email}}  </span>
       </div>
       <div class="profile-item">
         <label>Phone Number:</label>
-        <span> profile.phoneNumber </span>
+        <span> {{profileData.tel}} </span>
       </div>
       <button class="edit-btn">Edit</button>
     </div>
   
-    <div class="profile-form" *ngIf="isEditing">
+    <div class="profile-form" *ngIf="!isEditing">
       <div class="form-item">
         <label for="username">Username:</label>
         <input type="text" id="username" />
