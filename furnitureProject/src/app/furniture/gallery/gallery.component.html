@@ -1,0 +1,19 @@
+<div class="gallery-container">
+    <div class="gallery-card" *ngFor="let item of furnitureItems" (click)="toggleDetails(item)">
+      <div class="card-image">
+        <img [src]="item.img" alt="{{ item.model }}" />
+      </div>
+      <div class="card-info">
+        <h3>{{ item.model }}</h3>
+        <p class="price">Price: ${{ item.price }}</p>
+      </div>
+      <div *ngIf="item.showDetails" class="card-details">
+        <p><strong>Owner:</strong> {{ item.ownerName }}</p>
+        <p><strong>Model:</strong> {{ item.model }}</p>
+        <p><strong>Year:</strong> {{ item.year }}</p>
+        <p><strong>Description:</strong> {{ item.description }}</p>
+        <p><strong>Likes:</strong> {{ item.likes }}</p>
+      </div>
+    </div>
+  </div>
+  
