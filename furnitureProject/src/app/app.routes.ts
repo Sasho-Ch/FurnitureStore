@@ -4,6 +4,8 @@ import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { GalleryComponent } from './furniture/gallery/gallery.component';
+import { AddFurnitureComponent } from './furniture/add-furniture/add-furniture/add-furniture.component';
+import { YourFurnitureComponent } from './furniture/your-furniture/your-furniture/your-furniture.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,4 +14,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'gallery', component: GalleryComponent },
+  { path: 'add-furniture', component: AddFurnitureComponent },
+  { path: 'your-furniture', component: YourFurnitureComponent },
 ];
