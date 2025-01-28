@@ -7,6 +7,7 @@
   grid-template-columns: repeat(3, 1fr); /* Always show 3 cards in a row */
   gap: 20px;
   padding: 20px;
+
 }
 
 .gallery-card {
@@ -17,6 +18,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+
 }
 
 .gallery-card:hover {
