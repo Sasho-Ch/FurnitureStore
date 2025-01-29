@@ -1,36 +1,82 @@
 <div class="body">
-<div class="create-container">
+  <div class="create-container">
     <h2 class="form-title">Add New Furniture</h2>
-    <form class="create-form">
+    <form class="create-form" #form="ngForm" (ngSubmit)="addFurniture(form)">
       <div class="form-group">
         <label for="model">Model:</label>
-        <input type="text" id="model" name="model" placeholder="Enter model name" required />
+        <input
+          type="text"
+          id="model"
+          name="model"
+          placeholder="Enter model name"
+          ngModel
+          #inputModel="ngModel"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="year">Year:</label>
-        <input type="number" id="year" name="year" placeholder="Enter year of manufacture" required />
+        <input
+          type="number"
+          id="year"
+          name="year"
+          placeholder="Enter year of manufacture"
+          ngModel
+          #inputYear="ngModel"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" placeholder="Enter furniture description" required></textarea>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          placeholder="Enter furniture description"
+          ngModel
+          #inputDescription="ngModel"
+          required
+        ></textarea>
       </div>
       <div class="form-group">
         <label for="price">Price:</label>
-        <input type="number" id="price" name="price" placeholder="Enter price in USD" required />
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Enter price in USD"
+          ngModel
+          #inputPrice="ngModel"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="image">Image URL:</label>
-        <input type="url" id="image" name="image" placeholder="Enter image URL" required />
+        <input
+          type="url"
+          id="image"
+          name="image"
+          placeholder="Enter image URL"
+          ngModel
+          #inputImg="ngModel"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="material">Material</label>
-        <input type="text" id="material" name="material" placeholder="Enter material name" required />
+        <input
+          type="text"
+          id="material"
+          name="material"
+          placeholder="Enter material name"
+          ngModel
+          #inputMaterial="ngModel"
+          required
+        />
       </div>
       <div class="form-actions">
-        <button type="submit" class="submit-btn">Create Furniture</button>
+        <button class="submit-btn">Create Furniture</button>
       </div>
     </form>
   </div>
-
 </div>
-  
