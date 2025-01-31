@@ -64,14 +64,17 @@ export class UserService {
 
   login(email: string, password: string) {
     return this.http
-      .post<UserForAuth>(
-        'http://localhost:3000/users/login',
-        { email, password },
-        { withCredentials: true } 
-      )
-      .pipe(tap((user) => {
-        console.log(user);
-        this.user$$.next(user)}));
+  .post<UserForAuth>('http://localhost:3000/users/login', 
+    { email, password }, 
+    { withCredentials: true } 
+  )
+  .pipe(
+    tap((response) => {
+      console.log('🔍 Login Response:', response);
+      console.log('🔍 Cookies in Browser:', document.cookie);
+      this.user$$.next(response);
+    })
+  );
   }
 
   logout() {
@@ -90,19 +93,19 @@ export class UserService {
 
   getProfile() {
     return this.http
-      .get<UserForAuth>(
-        `http://localhost:3000/users/profile`,
-        { withCredentials: true } 
-      )
-      .pipe(
-        tap((user) => {
-          this.user$$.next(user);
-        }),
-        catchError(() => {
-          this.user$$.next(null); 
-          return of(null); 
-        })
-      );
+  .get<UserForAuth>('http://localhost:3000/users/profile', { withCredentials: true })
+  .pipe(
+    tap((response) => {
+      console.log('🔍 Profile Response:', response);
+      console.log('🔍 Cookies in Browser:', response._id);
+      this.user$$.next(response);
+    }),
+    catchError(() => {
+      console.warn('⚠️ Failed to fetch profile.');
+      this.user$$.next(null);
+      return of(null);
+    })
+  );
   }
 
   private isLocalStorageAvailable(): boolean {

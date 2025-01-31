@@ -2,7 +2,7 @@ import { User } from "./user";
 
 export interface Furniture {
     _id: string,
-    _ownerId: User,
+    userId: User,
     model: string,
     year: number,
     description: string,

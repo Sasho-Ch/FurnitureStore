@@ -18,7 +18,6 @@ export class AddFurnitureComponent {
     if(form.invalid) {
       return;
     }
-    console.log(form.value);
     
     const {model, year, description, price, img, material} = form.value;
 
