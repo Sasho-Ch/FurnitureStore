@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { ProfileDetails } from '../../types/user';
+import { log } from 'console';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,6 @@ export class ProfileComponent{
 
   ngOnInit(): void {
     if (this.userService.user!) {
-      // Only destructure if userService.user is not null
       const { username, email, tel } = this.userService.user!;
       this.profileData = { username, email, tel };
     } else {

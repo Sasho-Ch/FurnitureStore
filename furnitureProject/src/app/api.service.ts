@@ -10,7 +10,7 @@ export class ApiService {
     constructor(private http: HttpClient) {}
 
     getFurniture() {
-        return this.http.get<Furniture>(`http://localhost:3000/furnitures`, {withCredentials: true});
+        return this.http.get<Furniture[]>(`http://localhost:3000/furnitures`, {withCredentials: true});
     }
 
     getSingleFurniture(id: string) {

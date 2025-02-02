@@ -1,3 +1,4 @@
+import { Url } from "node:url";
 import { User } from "./user";
 
 export interface Furniture {

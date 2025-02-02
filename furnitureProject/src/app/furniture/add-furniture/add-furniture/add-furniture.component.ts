@@ -20,7 +20,9 @@ export class AddFurnitureComponent {
     }
     
     const {model, year, description, price, img, material} = form.value;
-
+    console.log(img);
+    console.log(model);
+    
     this.apiService.createFurniture(model, year, description, price, img, material).subscribe(() => {
       this.router.navigate(['/gallery'])
     })
