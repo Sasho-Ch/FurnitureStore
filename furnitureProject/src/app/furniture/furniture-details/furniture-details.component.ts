@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Furniture } from '../../types/furniture';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-furniture-details',
@@ -9,23 +11,24 @@ import { Router } from '@angular/router';
   styleUrl: './furniture-details.component.css'
 })
 export class FurnitureDetailsComponent {
-  furniture: any = {
-    img: 'https://i5.walmartimages.com/asr/516680b4-6329-458f-b650-c16e6e4183cf.1ea4eb16de56400c16fa84a9a4156d44.jpeg',
-    model: 'Sofa',
-    price: '200$',
-    userId: {
-      username: 'Sasho',
-      tel: '123-321-123',
-    },
-    year: '2004',
-    description: 'Very useful sofa for fun with girls',
-    material: 'Matrix',
+  furniture = {} as Furniture;
 
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private apiService: ApiService
+  ) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.params['furnitureId'];
+    this.apiService.getSingleFurniture(id).subscribe((furniture) => {
+      this.furniture = furniture;
+    })
   }
 
-  constructor(private router: Router) {}
+
 
   goBack() {
-    this.router.navigate(['/']); 
+    this.router.navigate(['/gallery']); 
   }
 }

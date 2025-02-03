@@ -9,5 +9,6 @@ export interface Furniture {
     description: string,
     price: number,
     img: string,
+    material: string,
     __v: number,
 }

@@ -48,20 +48,3 @@
   font-size: 1rem;
   font-weight: bold;
 }
-
-.card-details {
-  padding: 10px;
-  background: #f9f9f9;
-  border-top: 1px solid #ddd;
-  color: #6a3434;
-}
-
-.card-details p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-}
-
-.card-details strong {
-  font-weight: bold;
-  color: #6a3434;
-}

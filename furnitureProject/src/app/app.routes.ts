@@ -15,9 +15,18 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'gallery', component: GalleryComponent },
+  {
+     path: 'gallery',
+     children: [
+      {path: '', component: GalleryComponent},
+      {
+        path: ':furnitureId',
+        component: FurnitureDetailsComponent,
+      }
+     ], 
+  },
+
   { path: 'add-furniture', component: AddFurnitureComponent },
   { path: 'your-furniture', component: YourFurnitureComponent },
   { path: 'news', component: NewsComponent },
-  { path: 'details', component: FurnitureDetailsComponent },
 ];

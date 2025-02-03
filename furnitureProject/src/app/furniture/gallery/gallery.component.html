@@ -1,6 +1,7 @@
 <div class="body">
 <div class="gallery-container">
     <div class="gallery-card" *ngFor="let item of furnitures">
+      <a [routerLink]="item._id">
       <div class="card-image">
         <img [src]="item.img" alt="{{ item.model }}" />
       </div>
@@ -8,14 +9,7 @@
         <h3>{{ item.model }}</h3>
         <p class="price">Price: ${{ item.price }}</p>
       </div>
-      <div *ngIf="selectedItemId === item._id" class="card-details">
-        <p><strong>Owner:</strong> {{ item.userId.username }}</p>
-        <p><strong>Phone Number:</strong> {{ item.userId.tel }}</p>
-        <p><strong>Model:</strong> {{ item.model }}</p>
-        <p><strong>Year:</strong> {{ item.year }}</p>
-        <p><strong>Description:</strong> {{ item.description }}</p>
-        <p><strong>Material</strong> {{ item.description }}</p>
-      </div>
+      </a>
     </div>
   </div>
   </div>
