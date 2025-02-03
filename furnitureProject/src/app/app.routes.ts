@@ -7,6 +7,7 @@ import { GalleryComponent } from './furniture/gallery/gallery.component';
 import { AddFurnitureComponent } from './furniture/add-furniture/add-furniture/add-furniture.component';
 import { NewsComponent } from './news/news.component';
 import { YourFurnitureComponent } from './furniture/your-furniture/your-furniture.component';
+import { FurnitureDetailsComponent } from './furniture/furniture-details/furniture-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'add-furniture', component: AddFurnitureComponent },
   { path: 'your-furniture', component: YourFurnitureComponent },
   { path: 'news', component: NewsComponent },
+  { path: 'details', component: FurnitureDetailsComponent },
 ];
