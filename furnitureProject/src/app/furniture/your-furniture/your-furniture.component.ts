@@ -1,30 +1,37 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ApiService } from '../../api.service';
+import { Furniture } from '../../types/furniture';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-your-furniture',
-  imports: [NgFor, NgIf],
+  imports: [NgFor, RouterLink],
   templateUrl: './your-furniture.component.html',
-  styleUrl: './your-furniture.component.css'
+  styleUrl: './your-furniture.component.css',
 })
-export class YourFurnitureComponent {
-  furnitureItems = [
-    {
-      img: 'https://i5.walmartimages.com/asr/1a1bbb46-5e69-4d32-a998-7926df94f803_1.e081b98d040b819df7decaf9e729b041.jpeg',
-      model: 'Sofa',
-      price: 240,
-      ownerName: 'Sasho',
-      year: 2003,
-      description: 'Very comfortable',
-      showDetails: false,
-    }
-  ]
+export class YourFurnitureComponent implements OnInit {
+  furnitures: Furniture[] = [];
+  userFurnitures: Furniture[] = [];
 
+  constructor(private apiService: ApiService, private userService: UserService) {}
 
+  ngOnInit(): void {
+    // Fetch user profile first
+    this.userService.getProfile().subscribe(user => {
+      if (!user?.furnitures) {
+        console.warn("⚠️ No furnitures found for user!");
+        return;
+      }
 
-
-
-  toggleDetails(item: any) {
-    item.showDetails = !item.showDetails;
+      // Fetch all furniture after ensuring user data is loaded
+      this.apiService.getFurniture().subscribe((furnitures) => {
+        this.furnitures = furnitures;
+        this.userFurnitures = this.furnitures.filter(furniture =>
+          user.furnitures.includes(furniture._id)
+        );
+      });
+    });
   }
 }

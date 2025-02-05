@@ -14,6 +14,7 @@ export interface UserForAuth {
   tel: string;
   password: string;
   _id: string;
+  furnitures: string[],
 }
 
 export interface ProfileDetails {

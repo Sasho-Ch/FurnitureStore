@@ -13,7 +13,6 @@ import { RouterLink } from '@angular/router';
 
 export class GalleryComponent implements OnInit {
   furnitures: Furniture[] = [];
-  selectedItemId: string | null = null; // Track the selected item's ID
 
   constructor(private apiService: ApiService) {}
 

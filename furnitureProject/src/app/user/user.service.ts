@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap, of, catchError } from 'rxjs';
-import { UserForAuth } from '../types/user';
+import { ProfileDetails, UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
   private user$$ = new BehaviorSubject<UserForAuth | null>(null);
-  private user$ = this.user$$.asObservable();
+  user$ = this.user$$.asObservable();
 
   USER_KEY = '[user]';
   user: UserForAuth | null = null;
@@ -69,10 +69,8 @@ export class UserService {
     { withCredentials: true } 
   )
   .pipe(
-    tap((response) => {
-      console.log('🔍 Login Response:', response);
-      console.log('🔍 Cookies in Browser:', document.cookie);
-      this.user$$.next(response);
+    tap((user) => {
+      this.user$$.next(user);
     })
   );
   }
@@ -93,19 +91,18 @@ export class UserService {
 
   getProfile() {
     return this.http
-  .get<UserForAuth>('http://localhost:3000/users/profile', { withCredentials: true })
-  .pipe(
-    tap((response) => {
-      console.log('🔍 Profile Response:', response);
-      console.log('🔍 Cookies in Browser:', response._id);
-      this.user$$.next(response);
-    }),
-    catchError(() => {
-      console.warn('⚠️ Failed to fetch profile.');
-      this.user$$.next(null);
-      return of(null);
-    })
-  );
+      .get<UserForAuth>('http://localhost:3000/users/profile', { withCredentials: true })
+      .pipe(
+        tap((response) => {
+          console.log('✅ Full Profile Response:', response);
+          this.user$$.next(response);
+        }),
+        catchError((error) => {
+          console.error('❌ Profile Fetch Error:', error);
+          this.user$$.next(null);
+          return of(null);
+        })
+      );
   }
 
   private isLocalStorageAvailable(): boolean {

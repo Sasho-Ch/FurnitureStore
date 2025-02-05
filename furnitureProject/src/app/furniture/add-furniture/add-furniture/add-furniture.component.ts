@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../../api.service';
 import { Router } from '@angular/router';
-import { log } from 'console';
 
 @Component({
   selector: 'app-add-furniture',
@@ -20,8 +19,6 @@ export class AddFurnitureComponent {
     }
     
     const {model, year, description, price, img, material} = form.value;
-    console.log(img);
-    console.log(model);
     
     this.apiService.createFurniture(model, year, description, price, img, material).subscribe(() => {
       this.router.navigate(['/gallery'])
