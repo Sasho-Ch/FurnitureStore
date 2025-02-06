@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap, of, catchError } from 'rxjs';
+import { BehaviorSubject, tap, of, catchError, throwError } from 'rxjs';
 import { ProfileDetails, UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
@@ -85,6 +85,7 @@ export class UserService {
       .pipe(
         tap((user) => {
           this.user$$.next(null);
+          localStorage.removeItem(this.USER_KEY);
         })
       );
   }
@@ -101,6 +102,22 @@ export class UserService {
           console.error('❌ Profile Fetch Error:', error);
           this.user$$.next(null);
           return of(null);
+        })
+      );
+  }
+
+  editProfile(updatedProfile: Partial<UserForAuth>) {
+    return this.http
+      .put<UserForAuth>('http://localhost:3000/users/profile', updatedProfile, { withCredentials: true })
+      .pipe(
+        tap((updatedUser) => {
+          console.log('✅ Profile Updated:', updatedUser);
+          this.user$$.next(updatedUser);
+          
+        }),
+        catchError((error) => {
+          console.error('❌ Profile Update Error:', error);
+          return throwError(() => error);
         })
       );
   }
