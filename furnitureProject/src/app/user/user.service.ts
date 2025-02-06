@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap, of, catchError, throwError } from 'rxjs';
-import { ProfileDetails, UserForAuth } from '../types/user';
+import { ProfileDetails, User, UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -75,6 +75,10 @@ export class UserService {
   );
   }
 
+  getUserInfo(id: string) {
+    return this.http.get<User>(`http://localhost:3000/users/${id}`, {withCredentials: true})
+  }
+
   logout() {
     return this.http
       .post(
@@ -95,11 +99,10 @@ export class UserService {
       .get<UserForAuth>('http://localhost:3000/users/profile', { withCredentials: true })
       .pipe(
         tap((response) => {
-          console.log('✅ Full Profile Response:', response);
           this.user$$.next(response);
         }),
         catchError((error) => {
-          console.error('❌ Profile Fetch Error:', error);
+          console.error('Profile Fetch Error:', error);
           this.user$$.next(null);
           return of(null);
         })
@@ -111,12 +114,11 @@ export class UserService {
       .put<UserForAuth>('http://localhost:3000/users/profile', updatedProfile, { withCredentials: true })
       .pipe(
         tap((updatedUser) => {
-          console.log('✅ Profile Updated:', updatedUser);
           this.user$$.next(updatedUser);
           
         }),
         catchError((error) => {
-          console.error('❌ Profile Update Error:', error);
+          console.error('Profile Update Error:', error);
           return throwError(() => error);
         })
       );
