@@ -27,6 +27,11 @@ export const routes: Routes = [
   },
 
   { path: 'add-furniture', component: AddFurnitureComponent },
-  { path: 'your-furniture', component: YourFurnitureComponent },
+  { path: 'your-furniture', 
+    children: [
+      {path: '', component: YourFurnitureComponent},
+      {path: ':furnitureId', component: FurnitureDetailsComponent},
+    ]
+     },
   { path: 'news', component: NewsComponent },
 ];

@@ -18,19 +18,18 @@ export class YourFurnitureComponent implements OnInit {
   constructor(private apiService: ApiService, private userService: UserService) {}
 
   ngOnInit(): void {
-    // Fetch user profile first
     this.userService.getProfile().subscribe(user => {
-      if (!user?.furnitures) {
-        console.warn("⚠️ No furnitures found for user!");
+      if (!user) {
+        console.warn("User not logged in or session expired!");
         return;
       }
-
-      // Fetch all furniture after ensuring user data is loaded
+  
       this.apiService.getFurniture().subscribe((furnitures) => {
         this.furnitures = furnitures;
         this.userFurnitures = this.furnitures.filter(furniture =>
-          user.furnitures.includes(furniture._id)
+          user.furnitures?.includes(furniture._id) // Ensure `furnitures` exists
         );
+        console.log(this.userFurnitures);
       });
     });
   }

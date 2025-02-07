@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap, of, catchError, throwError } from 'rxjs';
 import { ProfileDetails, User, UserForAuth } from '../types/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -95,10 +95,17 @@ export class UserService {
   }
 
   getProfile() {
+    const httpOptions = {
+      withCredentials: true,
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
     return this.http
-      .get<UserForAuth>('http://localhost:3000/users/profile', { withCredentials: true })
+      .get<UserForAuth>('http://localhost:3000/users/profile', httpOptions)
       .pipe(
         tap((response) => {
+          console.log('Profile fetched successfully:', response);
           this.user$$.next(response);
         }),
         catchError((error) => {
