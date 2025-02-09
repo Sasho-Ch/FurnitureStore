@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Furniture } from "./types/furniture";
+import { Furniture, FurnitureModel } from "./types/furniture";
 import { User } from "./types/user";
 import { Observable } from "rxjs";
 
@@ -23,6 +23,11 @@ export class ApiService {
         const payload = {model, year, description, price, img, material};
         return this.http.post<Furniture>(`http://localhost:3000/furnitures`, payload, {withCredentials: true});
     }
+
+    editFurniture(id:string ,updatedFurniture: FurnitureModel) {
+        return this.http
+          .put<FurnitureModel>(`http://localhost:3000/furnitures/${id}`, updatedFurniture, { withCredentials: true })
+      }
 
     deleteFurniture(id: string) {
         return this.http.delete<Furniture>(`http://localhost:3000/furnitures/${id}`, {withCredentials: true});

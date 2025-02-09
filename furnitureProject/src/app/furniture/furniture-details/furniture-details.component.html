@@ -14,7 +14,7 @@
     </div>
 
     <div class="owner-actions" *ngIf="isOwner">
-      <button  class="edit-button">Edit</button>
+      <button class="edit-button" [routerLink]="['/edit-furniture', furniture._id]">Edit</button>
       <button (click)="deleteFurniture()" class="delete-button">Delete</button>
     </div>
 

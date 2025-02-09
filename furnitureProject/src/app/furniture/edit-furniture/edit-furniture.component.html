@@ -1,0 +1,71 @@
+<div class="body">
+    <div class="create-container">
+      <h2 class="form-title">Edit Your Furniture</h2>
+      <form class="create-form" [formGroup]="form" (ngSubmit)="editFurniture()">
+        <div class="form-group">
+          <label for="model">Model:</label>
+          <input
+            type="text"
+            id="model"
+            placeholder="Enter model name"
+            formControlName="model"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="year">Year:</label>
+          <input
+            type="number"
+            id="year"
+            placeholder="Enter year of manufacture"
+            formControlName="year"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea
+            id="description"
+            rows="4"
+            placeholder="Enter furniture description"
+            formControlName="description"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input
+            type="number"
+            id="price"
+            placeholder="Enter price in USD"
+            formControlName="price"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="img">Image URL:</label>
+          <input
+            type="text"
+            id="img"
+            placeholder="Enter image URL"
+            formControlName="img"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="material">Material</label>
+          <input
+            type="text"
+            id="material"
+            placeholder="Enter material name"
+            formControlName="material"
+            required
+          />
+        </div>
+        <div class="form-actions">
+          <button class="submit-btn">Edit Furniture</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

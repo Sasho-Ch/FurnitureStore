@@ -12,3 +12,12 @@ export interface Furniture {
     material: string,
     __v: number,
 }
+
+export interface FurnitureModel {
+    model: string,
+    year: number,
+    description: string,
+    price: number,
+    img: string,
+    material: string,
+}

@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Furniture } from '../../types/furniture';
 import { ApiService } from '../../api.service';
 import { UserService } from '../../user/user.service';
@@ -8,7 +8,7 @@ import { User } from '../../types/user';
 
 @Component({
   selector: 'app-furniture-details',
-  imports: [NgIf],
+  imports: [NgIf, RouterLink],
   templateUrl: './furniture-details.component.html',
   styleUrl: './furniture-details.component.css'
 })
