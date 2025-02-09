@@ -27,9 +27,8 @@ export class YourFurnitureComponent implements OnInit {
       this.apiService.getFurniture().subscribe((furnitures) => {
         this.furnitures = furnitures;
         this.userFurnitures = this.furnitures.filter(furniture =>
-          user.furnitures?.includes(furniture._id) // Ensure `furnitures` exists
+          user.furnitures?.includes(furniture._id)
         );
-        console.log(this.userFurnitures);
       });
     });
   }

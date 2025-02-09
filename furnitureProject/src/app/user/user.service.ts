@@ -95,17 +95,10 @@ export class UserService {
   }
 
   getProfile() {
-    const httpOptions = {
-      withCredentials: true,
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
     return this.http
-      .get<UserForAuth>('http://localhost:3000/users/profile', httpOptions)
+      .get<UserForAuth>('http://localhost:3000/users/profile', {withCredentials: true})
       .pipe(
         tap((response) => {
-          console.log('Profile fetched successfully:', response);
           this.user$$.next(response);
         }),
         catchError((error) => {
