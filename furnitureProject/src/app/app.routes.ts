@@ -10,6 +10,8 @@ import { YourFurnitureComponent } from './furniture/your-furniture/your-furnitur
 import { FurnitureDetailsComponent } from './furniture/furniture-details/furniture-details.component';
 import { EditFurnitureComponent } from './furniture/edit-furniture/edit-furniture.component';
 import { ErrorComponent } from './error/error.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ErrorMsgComponent } from './core/error-msg/error-msg.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -28,16 +30,17 @@ export const routes: Routes = [
     ],
   },
 
-  { path: 'add-furniture', component: AddFurnitureComponent },
-  { path: 'edit-furniture/:furnitureId', component: EditFurnitureComponent },
+  { path: 'add-furniture', component: AddFurnitureComponent, canActivate: [AuthGuard]},
+  { path: 'edit-furniture/:furnitureId', component: EditFurnitureComponent, canActivate: [AuthGuard] },
   {
     path: 'your-furniture',
     children: [
-      { path: '', component: YourFurnitureComponent },
+      { path: '', component: YourFurnitureComponent, canActivate: [AuthGuard] },
       { path: ':furnitureId', component: FurnitureDetailsComponent },
     ],
   },
   { path: 'news', component: NewsComponent },
+  { path:'error', component: ErrorMsgComponent },
   { path: '404', component: ErrorComponent },
   { path: '**', redirectTo: '/404' },
 ];
