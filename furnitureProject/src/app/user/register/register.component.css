@@ -72,3 +72,12 @@ button {
 button:hover {
     background-color: #a65e5e; 
 }
+
+.input-error {
+    border: 2px solid red !important;
+}
+
+.error {
+    color: red !important;
+    font-size: 14px;
+}

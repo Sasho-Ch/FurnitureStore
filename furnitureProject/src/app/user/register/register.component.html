@@ -1,31 +1,118 @@
 <div class="body">
-<div class="container">
+  <div class="container">
     <h1>Register</h1>
     <p>Each field marked with (*) is required</p>
 
     <form class="registerBox" [formGroup]="form" (ngSubmit)="register()">
+      <div class="itemGroup">
+        <label for="username">Username</label>
+        <input
+          [class]="
+            isFieldTextMissing('username') || isNotMinLength
+              ? 'input-error'
+              : ''
+          "
+          type="text"
+          id="username"
+          name="username"
+          formControlName="username"
+        />
+        @if(form.get('username')?.touched){
+        <div>
+          @if(form.get('username')?.errors?.['required']) {
+          <p class="error">Username is required!</p>
+          } @if(form.get('username')?.errors?.['minlength']) {
+          <p class="error">Username must be at least 5 characters!</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="itemGroup">
+        <label for="email">Email</label>
+        <input
+          [class]="
+            isFieldTextMissing('email') || isEmailNotValid ? 'input-error' : ''
+          "
+          type="text"
+          id="email"
+          name="email"
+          formControlName="email"
+        />
+        @if(form.get('email')?.touched){
+        <div>
+          @if(form.get('email')?.errors?.['required']) {
+          <p class="error">Email is required!</p>
+          } @if(form.get('email')?.errors?.['emailValidator']) {
+          <p class="error">Email is not valid!</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="itemGroup">
+        <label for="tel">Phone number</label>
+        <input
+          [class]="
+            isFieldTextMissing('tel') || isTelNotMinLength ? 'input-error' : ''
+          "
+          type="text"
+          id="tel"
+          name="tel"
+          formControlName="tel"
+        />
+        @if(form.get('tel')?.touched){
+        <div>
+          @if(form.get('tel')?.errors?.['required']) {
+          <p class="error">Phone number is required!</p>
+          } @if(form.get('tel')?.errors?.['minlength']) {
+          <p class="error">Phone number must be 10 digits!</p>
+          }
+        </div>
+        }
+      </div>
+      <div formGroupName="passGroup">
         <div class="itemGroup">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" formControlName="username">
+          <label for="password">Password</label>
+          <input
+            [class]="((passGroup?.get('password')?.touched)
+            && (passGroup?.get('password')?.errors?.['required'])
+            || (passGroup?.get('password')?.touched) 
+            && (passGroup?.get('password')?.errors?.['minlength'])) ? 'input-error' : ''"
+            type="text"
+            id="password"
+            name="password"
+            formControlName="password"
+          />
+          @if(passGroup?.get('password')?.touched) {
+          <div>
+            @if(passGroup?.get('password')?.errors?.['required']) {
+            <p class="error">Password is required!</p>
+            } @if (passGroup?.get('password')?.errors?.['minlength']) {
+            <p class="error">Password must be at least 5 characters!</p>
+            }
+          </div>
+          }
         </div>
         <div class="itemGroup">
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" formControlName="email">
+          <label for="rePass">Repeat Password</label>
+          <input
+            [class]="((passGroup?.get('rePassword')?.touched && (passGroup?.get('rePassword')?.errors?.['required'] || passGroup?.errors?.['matchPasswordsValidator']))) ? 'input-error' : ''"
+            type="text"
+            id="rePass"
+            name="rePass"
+            formControlName="rePassword"
+          />
+          @if (passGroup?.get('rePassword')?.touched) {
+            <div>
+              @if(passGroup?.get('rePassword')?.errors?.['required'] ||
+              passGroup?.errors?.['matchPasswordsValidator'] ) {
+              <p class="error">Repeat Password does not match password!</p>
+              }
+            </div>
+            }
         </div>
-        <div class="itemGroup">
-            <label for="tel">Phone number</label>
-            <input type="text" id="tel" name="tel" formControlName="tel">
-        </div>
-        <div class="itemGroup">
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password" formControlName="password">
-        </div>
-        <div class="itemGroup">
-            <label for="rePass">Repeat Password</label>
-            <input type="text" id="rePass" name="rePass" formControlName="rePassword">
-        </div>
+      </div>
 
-        <button>Register</button>
+      <button>Register</button>
     </form>
-</div>
+  </div>
 </div>
