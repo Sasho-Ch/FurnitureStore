@@ -1,0 +1,64 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    text-align: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.error-container h1 {
+    font-size: 3rem;
+    color: #6a3434;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.error-container p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.home-button {
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #6a3434;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.home-button:hover {
+    background-color: #883a3a;
+    transform: scale(1.05);
+}
+
+.spinning-item {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.spinning-item img {
+    width: 100%;
+    height: auto;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
