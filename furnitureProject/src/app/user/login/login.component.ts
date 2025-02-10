@@ -19,12 +19,13 @@ export class LoginComponent {
 
   login() {
     if (this.form.invalid) {
+      console.error('Invalid Login Form!');
       return;
     }
 
     const {email, password} = this.form.value;
     this.userService.login(email!, password!).subscribe(() => {
-      this.router.navigate(['/'])
+      this.router.navigate(['/gallery'])
     })
   }
 }

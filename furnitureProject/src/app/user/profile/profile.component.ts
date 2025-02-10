@@ -2,7 +2,9 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { ProfileDetails } from '../../types/user';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { emailValidator } from '../../utils/email.validator';
+import { DOMAINS } from '../../constants';
 
 @Component({
   selector: 'app-profile',
@@ -15,9 +17,9 @@ export class ProfileComponent{
   profileData: ProfileDetails = { username: '', email: '', tel: '' };
 
   form = new FormGroup({
-    username: new FormControl('', []),
-    email: new FormControl('', []),
-    tel: new FormControl('', []),
+    username: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    email: new FormControl('', [Validators.required, emailValidator(DOMAINS)]),
+    tel: new FormControl('', [Validators.required, Validators.minLength(10)]),
   })
 
   constructor(private userService: UserService) {}
